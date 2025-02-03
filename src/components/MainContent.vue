@@ -1,8 +1,8 @@
 <template>
-    <div class="main-content">
-      <h1 class="main-title">{{ selectedMenu }}</h1>
-  
-      <div class="chat-container">
+  <div class="main-content">
+    <h1 class="main-title">{{ selectedMenu }}</h1>
+
+    <div class="chat-container">
       <div v-for="(msg, index) in messages" :key="index" class="message" :class="msg.sender">
         <div class="icon">
           <img v-if="msg.sender === 'user'" src="@/assets/user-icon.png" alt="Usuário" />
@@ -20,18 +20,18 @@
         <img src="@/assets/send-icon.png" alt="Enviar" />
       </button>
     </div>
-    </div>
-  </template>
-  
-  <script>
-  export default {
-    props: {
-      selectedMenu: {
-        type: String,
-        required: true,
-      },
+  </div>
+</template>
+
+<script>
+export default {
+  props: {
+    selectedMenu: {
+      type: String,
+      required: true,
     },
-    data() {
+  },
+  data() {
     return {
       newMessage: "",
       messages: [], // Lista de mensagens do chat
@@ -51,33 +51,33 @@
     },
   },
 };
-  </script>
-  
-  <style scoped>
-  .main-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    color: #fff;
-  }
-  
-  .main-title {
-    position: fixed;
-    top: 0;
-    left: 300px;
-    width: calc(100% - 300px);
-    background-color: #1e1e1e;
-    padding: 15px 0;
-    text-align: center;
-    font-size: 24px;
-    font-weight: bold;
-    z-index: 10;
-    margin-bottom: 20px;
-  }
-  
-  .chat-container {
+</script>
+
+<style scoped>
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #fff;
+}
+
+.main-title {
+  position: fixed;
+  top: 0;
+  left: 300px;
+  width: calc(100% - 300px);
+  background-color: #1e1e1e;
+  padding: 15px 0;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  z-index: 10;
+  margin-bottom: 20px;
+}
+
+.chat-container {
   width: 80%;
   max-width: 600px;
   background-color: #1e1e1e;
@@ -144,4 +144,3 @@
   height: 25px;
 }
 </style>
-  
