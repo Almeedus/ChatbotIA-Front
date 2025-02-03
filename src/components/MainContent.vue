@@ -64,8 +64,16 @@
   }
   
   .main-title {
+    position: fixed;
+    top: 0;
+    left: 300px;
+    width: calc(100% - 300px);
+    background-color: #1e1e1e;
+    padding: 15px 0;
+    text-align: center;
     font-size: 24px;
     font-weight: bold;
+    z-index: 10;
     margin-bottom: 20px;
   }
   
