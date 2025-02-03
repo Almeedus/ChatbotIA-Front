@@ -3,34 +3,23 @@
       <h1 class="main-title">{{ selectedMenu }}</h1>
   
       <div class="chat-container">
-        <!-- Mensagem do usuário -->
-        <div class="user-message">
-          <div class="message-content">
-            Qual é o email de contato do IFSP de Itapetininga?
-          </div>
-          <div class="user-icon">
-            <img src="@/assets/user-icon.png" alt="Ícone do Usuário" />
-          </div>
+      <div v-for="(msg, index) in messages" :key="index" class="message" :class="msg.sender">
+        <div class="icon">
+          <img v-if="msg.sender === 'user'" src="@/assets/user-icon.png" alt="Usuário" />
+          <img v-else src="@/assets/bot-icon.png" alt="Bot" />
         </div>
-  
-        <!-- Resposta do chatbot -->
-        <div class="bot-message">
-          <div class="bot-icon">
-            <img src="@/assets/bot-icon.png" alt="Ícone do Sistema" />
-          </div>
-          <div class="message-content">
-            O e-mail do campus de Itapetininga é matricula.itp@ifsp.edu.br.
-          </div>
-        </div>
-  
-        <!-- Campo de entrada -->
-        <div class="input-container">
-          <input type="text" placeholder="Escreva sua pergunta..." />
-          <button>
-            <img src="@/assets/send-icon.png" alt="Enviar" />
-          </button>
+        <div class="message-content">
+          {{ msg.text }}
         </div>
       </div>
+    </div>
+
+    <div class="input-container">
+      <input v-model="newMessage" @keyup.enter="sendMessage" type="text" placeholder="Escreva sua pergunta..." />
+      <button @click="sendMessage">
+        <img src="@/assets/send-icon.png" alt="Enviar" />
+      </button>
+    </div>
     </div>
   </template>
   
@@ -42,7 +31,26 @@
         required: true,
       },
     },
-  };
+    data() {
+    return {
+      newMessage: "",
+      messages: [], // Lista de mensagens do chat
+    };
+  },
+  methods: {
+    sendMessage() {
+      if (this.newMessage.trim() !== "") {
+        this.messages.push({ text: this.newMessage, sender: "user" });
+        this.newMessage = "";
+
+        // Simulando resposta do bot
+        setTimeout(() => {
+          this.messages.push({ text: "Resposta do bot...", sender: "bot" });
+        }, 1000);
+      }
+    },
+  },
+};
   </script>
   
   <style scoped>
@@ -62,71 +70,70 @@
   }
   
   .chat-container {
-    width: 80%;
-    max-width: 600px;
-    background-color: #1e1e1e;
-    padding: 20px;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  /* Mensagem do usuário */
-  .user-message,
-  .bot-message {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-  }
-  
-  .user-message .message-content,
-  .bot-message .message-content {
-    background-color: #292929;
-    padding: 10px 15px;
-    border-radius: 10px;
-    color: #fff;
-  }
-  
-  .user-message .user-icon img {
-    width: 30px;
-    height: 30px;
-  }
-  
-  .bot-message .bot-icon img {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-  }
-  
-  /* Campo de entrada */
-  .input-container {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background-color: #292929;
-    padding: 10px;
-    border-radius: 10px;
-  }
-  
-  .input-container input {
-    flex: 1;
-    background: transparent;
-    border: none;
-    outline: none;
-    color: #fff;
-    padding: 10px;
-  }
-  
-  .input-container button {
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .input-container button img {
-    width: 25px;
-    height: 25px;
-  }
-  </style>
+  width: 80%;
+  max-width: 600px;
+  background-color: #1e1e1e;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.message {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user {
+  justify-content: flex-end;
+}
+
+.bot {
+  justify-content: flex-start;
+}
+
+.icon img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.message-content {
+  background-color: #292929;
+  padding: 10px 15px;
+  border-radius: 10px;
+  color: #fff;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #292929;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.input-container input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  padding: 10px;
+}
+
+.input-container button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.input-container button img {
+  width: 25px;
+  height: 25px;
+}
+</style>
   
