@@ -86,6 +86,9 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  overflow-y: auto;
+  max-height: 50vh;
+  padding-bottom: 80px;
 }
 
 .message {
@@ -122,6 +125,12 @@ export default {
   background-color: #292929;
   padding: 10px;
   border-radius: 10px;
+  position: fixed;
+  bottom: 10px;
+  left: 300px;
+  width: calc(80% - 300px);
+  z-index: 10;
+  left: 30%;
 }
 
 .input-container input {
