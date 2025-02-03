@@ -1,26 +1,51 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app" class="app-container">
+    <SidebarContent @menu-selected="updateSelectedMenu" />
+    <div class="content-container">
+      <MainContent :selectedMenu="selectedMenu" />
+    </div>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import SidebarContent from "./components/SidebarContent.vue";
+import MainContent from "./components/MainContent.vue";
 
 export default {
-  name: 'App',
   components: {
-    HelloWorld
-  }
-}
+    SidebarContent,
+    MainContent,
+  },
+  data() {
+    return {
+      selectedMenu: "Bem-vindo", // Texto padrão
+    };
+  },
+  methods: {
+    updateSelectedMenu(menu) {
+      this.selectedMenu = menu; // Atualiza o texto com o valor selecionado no menu
+    },
+  },
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+/* Estilos gerais */
+body {
+  margin: 0;
+  font-family: "Arial", sans-serif;
+  background-color: #1e1e1e;
+  color: #fff;
+}
+
+.app-container {
+  display: flex;
+  height: 100vh;
+}
+
+.content-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 </style>
