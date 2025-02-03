@@ -1,6 +1,6 @@
 <template>
     <div class="main-content">
-      <h1 class="main-title">{{ selectedMenuText }}</h1>
+      <h1 class="main-title">{{ selectedMenu }}</h1>
   
       <div class="chat-container">
         <!-- Mensagem do usuário -->
@@ -37,9 +37,9 @@
   <script>
   export default {
     props: {
-      selectedMenuText: {
+      selectedMenu: {
         type: String,
-        default: "Bem Vindo",
+        required: true,
       },
     },
   };
