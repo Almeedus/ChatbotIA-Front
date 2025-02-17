@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     selectItem(item) {
-      this.$emit("menu-selected", item.text); // Envia o texto selecionado para o componente pai
+      this.$emit("menu-selected", item.text);
     },
   },
 };
@@ -40,9 +40,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* Centraliza verticalmente */
   align-items: center;
-  /* Centraliza horizontalmente */
 }
 
 .logo {
@@ -72,7 +70,6 @@ export default {
   margin: 10px 0;
   padding: 10px;
   text-align: center;
-  /*background-color: #1e1e1e;*/
   border-radius: 4px;
   color: #ffffff;
   transition: background-color 0.3s ease;

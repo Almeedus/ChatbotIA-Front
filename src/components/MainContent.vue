@@ -2,7 +2,7 @@
   <div class="main-content">
     <h1 class="main-title">{{ selectedMenu }}</h1>
 
-    <div class="chat-container">
+    <div class="chat-container" ref="chatContainer">
       <div v-for="(msg, index) in messages" :key="index" class="message" :class="msg.sender">
         <div class="icon">
           <img v-if="msg.sender === 'user'" src="@/assets/user-icon.png" alt="Usuário" />
@@ -34,7 +34,7 @@ export default {
   data() {
     return {
       newMessage: "",
-      messages: [], // Lista de mensagens do chat
+      messages: [], 
     };
   },
   methods: {
@@ -42,13 +42,25 @@ export default {
       if (this.newMessage.trim() !== "") {
         this.messages.push({ text: this.newMessage, sender: "user" });
         this.newMessage = "";
+        this.$nextTick(() => {
+          this.scrollToBottom();
+        });
 
         // Simulando resposta do bot
         setTimeout(() => {
           this.messages.push({ text: "Resposta do bot...", sender: "bot" });
+          this.$nextTick(() => {
+            this.scrollToBottom();
+          });
         }, 1000);
       }
     },
+    scrollToBottom() {
+      const container = this.$refs.chatContainer;
+      if (container) {
+        container.scrollTop = container.scrollHeight;
+      }
+    }
   },
 };
 </script>
@@ -59,7 +71,7 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100%;
+  height: 100vh;
   color: #fff;
 }
 
@@ -88,8 +100,30 @@ export default {
   gap: 10px;
   overflow-y: auto;
   max-height: 50vh;
+  max-width: 1000px;
   padding-bottom: 80px;
+  flex-grow: 1; 
+  margin-bottom: 20px; 
 }
+
+.chat-container::-webkit-scrollbar {
+  width: 8px; 
+}
+
+.chat-container::-webkit-scrollbar-track {
+  background: #292929;
+  border-radius: 10px;
+}
+
+.chat-container::-webkit-scrollbar-thumb {
+  background: #00ff88;
+  border-radius: 10px;
+}
+
+.chat-container::-webkit-scrollbar-thumb:hover {
+  background: #00ff95;
+}
+
 
 .message {
   display: flex;
@@ -127,8 +161,9 @@ export default {
   border-radius: 10px;
   position: fixed;
   bottom: 10px;
-  left: 300px;
+  left: 50%;
   width: calc(80% - 300px);
+  max-width: 1000px;
   z-index: 10;
   left: 30%;
 }
