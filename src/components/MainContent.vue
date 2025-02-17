@@ -91,6 +91,25 @@ export default {
   padding-bottom: 80px;
 }
 
+.chat-container::-webkit-scrollbar {
+  width: 8px; /* Largura da barra de rolagem */
+}
+
+.chat-container::-webkit-scrollbar-track {
+  background: #292929; /* Cor do fundo da barra de rolagem */
+  border-radius: 10px;
+}
+
+.chat-container::-webkit-scrollbar-thumb {
+  background: #00ff88; /* Cor do "botão" da barra de rolagem */
+  border-radius: 10px;
+}
+
+.chat-container::-webkit-scrollbar-thumb:hover {
+  background: #00ff95; /* Cor ao passar o mouse */
+}
+
+
 .message {
   display: flex;
   align-items: center;
