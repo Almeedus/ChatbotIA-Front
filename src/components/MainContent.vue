@@ -34,7 +34,7 @@ export default {
   data() {
     return {
       newMessage: "",
-      messages: [], // Lista de mensagens do chat
+      messages: [], 
     };
   },
   methods: {
@@ -71,7 +71,7 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100%;
+  height: 100vh;
   color: #fff;
 }
 
@@ -100,25 +100,28 @@ export default {
   gap: 10px;
   overflow-y: auto;
   max-height: 50vh;
+  max-width: 1000px;
   padding-bottom: 80px;
+  flex-grow: 1; 
+  margin-bottom: 20px; 
 }
 
 .chat-container::-webkit-scrollbar {
-  width: 8px; /* Largura da barra de rolagem */
+  width: 8px; 
 }
 
 .chat-container::-webkit-scrollbar-track {
-  background: #292929; /* Cor do fundo da barra de rolagem */
+  background: #292929;
   border-radius: 10px;
 }
 
 .chat-container::-webkit-scrollbar-thumb {
-  background: #00ff88; /* Cor do "botão" da barra de rolagem */
+  background: #00ff88;
   border-radius: 10px;
 }
 
 .chat-container::-webkit-scrollbar-thumb:hover {
-  background: #00ff95; /* Cor ao passar o mouse */
+  background: #00ff95;
 }
 
 
@@ -158,8 +161,9 @@ export default {
   border-radius: 10px;
   position: fixed;
   bottom: 10px;
-  left: 300px;
+  left: 50%;
   width: calc(80% - 300px);
+  max-width: 1000px;
   z-index: 10;
   left: 30%;
 }
