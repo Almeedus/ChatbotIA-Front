@@ -18,12 +18,12 @@ export default {
   },
   data() {
     return {
-      selectedMenu: "Bem-vindo", // Texto padrão
+      selectedMenu: "Bem-vindo",
     };
   },
   methods: {
     updateSelectedMenu(menu) {
-      this.selectedMenu = menu; // Atualiza o texto com o valor selecionado no menu
+      this.selectedMenu = menu;
     },
   },
 };
