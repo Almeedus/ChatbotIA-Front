@@ -2,7 +2,7 @@
   <div class="main-content">
     <h1 class="main-title">{{ selectedMenu }}</h1>
 
-    <div class="chat-container">
+    <div class="chat-container" ref="chatContainer">
       <div v-for="(msg, index) in messages" :key="index" class="message" :class="msg.sender">
         <div class="icon">
           <img v-if="msg.sender === 'user'" src="@/assets/user-icon.png" alt="Usuário" />
@@ -42,13 +42,25 @@ export default {
       if (this.newMessage.trim() !== "") {
         this.messages.push({ text: this.newMessage, sender: "user" });
         this.newMessage = "";
+        this.$nextTick(() => {
+          this.scrollToBottom();
+        });
 
         // Simulando resposta do bot
         setTimeout(() => {
           this.messages.push({ text: "Resposta do bot...", sender: "bot" });
+          this.$nextTick(() => {
+            this.scrollToBottom();
+          });
         }, 1000);
       }
     },
+    scrollToBottom() {
+      const container = this.$refs.chatContainer;
+      if (container) {
+        container.scrollTop = container.scrollHeight;
+      }
+    }
   },
 };
 </script>
