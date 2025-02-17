@@ -30,7 +30,6 @@ export default {
 </script>
 
 <style>
-/* Estilos gerais */
 body {
   margin: 0;
   font-family: "Arial", sans-serif;

@@ -46,7 +46,6 @@ export default {
           this.scrollToBottom();
         });
 
-        // Simulando resposta do bot
         setTimeout(() => {
           this.messages.push({ text: "Resposta do bot...", sender: "bot" });
           this.$nextTick(() => {
