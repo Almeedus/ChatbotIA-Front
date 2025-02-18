@@ -8,9 +8,7 @@
           <img v-if="msg.sender === 'user'" src="@/assets/user-icon.png" alt="Usuário" />
           <img v-else src="@/assets/bot-icon.png" alt="Bot" />
         </div>
-        <div class="message-content">
-          {{ msg.text }}
-        </div>
+        <div class="message-content" v-html="msg.text"></div>
       </div>
     </div>
 
@@ -49,13 +47,13 @@ export default {
 
         try {
           const response = await api.post("/duvidas", { query: userMessage }, {headers: { "Content-Type": "application/json" }});
-          const botMessage = response.data.response;
+          const botMessage = response.data.response?.result || "Desculpe, não consegui entender a resposta.";
           this.messages.push({ text: botMessage, sender: "bot" });
           this.scrollToBottom();
         }
         catch (error) {
           console.error("Erro ao enviar a mensagem:", error);
-          this.message.push({ text: "Desculpe, aconteceu um erro ao processar sua pergunta.", sender: "bot" });
+          this.messages.push({ text: "Desculpe, aconteceu um erro ao processar sua pergunta.", sender: "bot" });
           this.scrollToBottom();	
         }
       }
