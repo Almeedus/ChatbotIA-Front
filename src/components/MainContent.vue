@@ -47,8 +47,10 @@ export default {
 
         try {
           const response = await api.post("/duvidas", { query: userMessage }, {headers: { "Content-Type": "application/json" }});
-          const botMessage = response.data.response?.result || "Desculpe, não consegui entender a resposta.";
-          this.messages.push({ text: botMessage.replace(/\n/g, "<br>"), sender: "bot" });
+          const botMessage = response.data.response?.result
+            .replace(/- \*\*(.*?)\*\*: /g, "<br><strong>$1</strong>: ") // Deixa os cursos destacados
+            .replace(/\n/g, "<br>") || "Desculpe, não consegui entender a resposta.";
+          this.messages.push({ text: botMessage, sender: "bot" });
           this.scrollToBottom();
         }
         catch (error) {
