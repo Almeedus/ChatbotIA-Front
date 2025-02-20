@@ -8,9 +8,7 @@
           <img v-if="msg.sender === 'user'" src="@/assets/user-icon.png" alt="Usuário" />
           <img v-else src="@/assets/bot-icon.png" alt="Bot" />
         </div>
-        <div class="message-content">
-          {{ msg.text }}
-        </div>
+        <div class="message-content" v-html="msg.text"></div>
       </div>
     </div>
 
@@ -24,6 +22,8 @@
 </template>
 
 <script>
+import api from '@/api';
+
 export default {
   props: {
     selectedMenu: {
@@ -38,20 +38,26 @@ export default {
     };
   },
   methods: {
-    sendMessage() {
+    async sendMessage() {
       if (this.newMessage.trim() !== "") {
+        const userMessage = this.newMessage;
         this.messages.push({ text: this.newMessage, sender: "user" });
-        this.newMessage = "";
-        this.$nextTick(() => {
-          this.scrollToBottom();
-        });
+        this.newMessage = '';
+        this.scrollToBottom();
 
-        setTimeout(() => {
-          this.messages.push({ text: "Resposta do bot...", sender: "bot" });
-          this.$nextTick(() => {
-            this.scrollToBottom();
-          });
-        }, 1000);
+        try {
+          const response = await api.post("/duvidas", { query: userMessage }, {headers: { "Content-Type": "application/json" }});
+          const botMessage = response.data.response?.result
+            .replace(/- \*\*(.*?)\*\*: /g, "<br><strong>$1</strong>: ") // Deixa os cursos destacados
+            .replace(/\n/g, "<br>") || "Desculpe, não consegui entender a resposta.";
+          this.messages.push({ text: botMessage, sender: "bot" });
+          this.scrollToBottom();
+        }
+        catch (error) {
+          console.error("Erro ao enviar a mensagem:", error);
+          this.messages.push({ text: "Desculpe, aconteceu um erro ao processar sua pergunta.", sender: "bot" });
+          this.scrollToBottom();	
+        }
       }
     },
     scrollToBottom() {
