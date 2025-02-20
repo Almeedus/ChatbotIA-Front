@@ -48,7 +48,7 @@ export default {
         try {
           const response = await api.post("/duvidas", { query: userMessage }, {headers: { "Content-Type": "application/json" }});
           const botMessage = response.data.response?.result || "Desculpe, não consegui entender a resposta.";
-          this.messages.push({ text: botMessage, sender: "bot" });
+          this.messages.push({ text: botMessage.replace(/\n/g, "<br>"), sender: "bot" });
           this.scrollToBottom();
         }
         catch (error) {
