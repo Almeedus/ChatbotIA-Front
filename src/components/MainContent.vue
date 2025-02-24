@@ -165,7 +165,7 @@ export default {
   padding: 10px;
   border-radius: 10px;
   position: fixed;
-  bottom: 10px;
+  bottom: 50px;
   left: 50%;
   width: calc(80% - 300px);
   max-width: 1000px;
