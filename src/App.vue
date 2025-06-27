@@ -65,8 +65,14 @@ export default {
 </script>
 
 <style>
-body {
+html, body {
   margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: 100%;
+}
+
+body {
   font-family: "Arial", sans-serif;
   background-color: #1e1e1e;
   color: #fff;
