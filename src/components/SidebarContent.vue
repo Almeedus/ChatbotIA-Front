@@ -1,5 +1,7 @@
 <template>
   <aside class="sidebar">
+    <button class="close-btn" @click="$emit('close-sidebar')">✕</button>
+
     <div class="logo">
       <img src="@/assets/logo.png" alt="Logo ChatBot IFSP" />
       <h2>SEÇÃO DE DÚVIDAS</h2>
@@ -39,13 +41,34 @@ export default {
   background-color: #292929;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  position: relative;
+  padding-top: 20px;
+}
+
+.close-btn {
+  display: none;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+@media (max-width: 420px) {
+  .close-btn {
+    display: block;
+  }
 }
 
 .logo {
   text-align: center;
   margin-bottom: 30px;
+  margin-top: 30px;
 }
 
 .logo img {
@@ -55,7 +78,7 @@ export default {
 
 .logo h2 {
   font-size: 18px;
-  color: rgb(255, 255, 255)
+  color: white;
 }
 
 .menu {
