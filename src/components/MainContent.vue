@@ -141,7 +141,6 @@ export default {
   color: #fff;
 }
 
-/* Ajustes para input-container: fundo e borda só no input */
 .input-container {
   display: flex;
   align-items: center;
@@ -153,13 +152,12 @@ export default {
   width: 90%;
   max-width: 500px;
   z-index: 10;
-  /* sem background nem padding aqui */
 }
 
 .input-container input {
   flex: none;
   width: 85%;
-  background-color: #292929;  /* fundo só no input */
+  background-color: #292929;
   border: none;
   outline: none;
   padding: 10px 15px;
