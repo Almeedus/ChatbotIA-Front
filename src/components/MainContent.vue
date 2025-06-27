@@ -190,4 +190,40 @@ export default {
   width: 25px;
   height: 25px;
 }
+
+@media (max-width: 420px) {
+  .main-title {
+    position: static;
+    width: 100%;
+    left: 0;
+    font-size: 18px;
+    padding: 10px;
+  }
+
+  .chat-container {
+    width: 100%;
+    padding: 10px;
+    border-radius: 0;
+    height: 65vh;
+    overflow-y: auto;
+  }
+
+  .input-container {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    gap: 8px;
+    box-sizing: border-box;
+  }
+
+  input {
+    flex: 1;
+  }
+
+  button img {
+    width: 24px;
+    height: 24px;
+  }
+}
+
 </style>
