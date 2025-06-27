@@ -1,6 +1,5 @@
 <template>
   <div class="main-content">
-    <h1 class="main-title">{{ selectedMenu }}</h1>
 
     <div class="chat-container" ref="chatContainer">
       <div v-for="(msg, index) in messages" :key="index" class="message" :class="msg.sender">
