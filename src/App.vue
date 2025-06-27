@@ -4,7 +4,6 @@
       ☰
     </button>
     <SidebarContent v-if="showSidebar" @menu-selected="updateSelectedMenu" />
-
     <div class="content-container">
       <MainContent :selectedMenu="selectedMenu" />
     </div>
@@ -23,8 +22,17 @@ export default {
   data() {
     return {
       selectedMenu: "Bem-vindo",
-      showSidebar: window.innerWidth > 420,
+      showSidebar: false, // inicia sempre fechado
     };
+  },
+  mounted() {
+    if (window.innerWidth > 420) {
+      this.showSidebar = true; // abre automaticamente só no desktop
+    }
+    window.addEventListener("resize", this.handleResize);
+  },
+  beforeUnmount() {
+    window.removeEventListener("resize", this.handleResize);
   },
   methods: {
     updateSelectedMenu(menu) {
@@ -33,6 +41,13 @@ export default {
     },
     toggleSidebar() {
       this.showSidebar = !this.showSidebar;
+    },
+    handleResize() {
+      if (window.innerWidth > 420) {
+        this.showSidebar = true;
+      } else {
+        this.showSidebar = false;
+      }
     },
   },
 };
@@ -71,17 +86,17 @@ body {
   border-radius: 5px;
 }
 
-@media (max-width: 420px) {
+@media (max-width: 768px) {
   .app-container {
     flex-direction: column;
   }
 
-  .sidebar {
-    display: none;
-  }
-
   .mobile-menu-btn {
     display: block;
+  }
+
+  .sidebar {
+    display: none;
   }
 
   .content-container {
