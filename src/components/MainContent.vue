@@ -138,6 +138,10 @@ export default {
   padding: 10px 15px;
   border-radius: 10px;
   color: #fff;
+
+  word-wrap: break-word;
+  max-width: 80%;
+  white-space: pre-wrap;
 }
 
 .input-container {
