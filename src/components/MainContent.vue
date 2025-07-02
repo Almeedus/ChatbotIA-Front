@@ -59,7 +59,10 @@ export default {
       try {
         const response = await api.post(
           "/duvidas",
-          { query: userText },
+          {
+            query: userText,
+            section: this.selectedMenu,
+          },
           { headers: { "Content-Type": "application/json" } }
         );
 
