@@ -3,12 +3,11 @@
 
     <div class="chat-container" ref="chatContainer">
       <div v-for="(msg, index) in messages" :key="index" class="message" :class="msg.sender">
-        <div class="icon">
-          <img v-if="msg.sender === 'user'" src="@/assets/user-icon.png" alt="Usuário" />
-          <img v-else src="@/assets/bot-icon.png" alt="Bot" />
+        <div class="icon" v-if="msg.sender === 'user'">
+          <img src="@/assets/user-icon.png" alt="Usuário" />
         </div>
-        <div class="message-content" v-html="msg.text"></div>
-      </div>
+      <div class="message-content" v-html="msg.text"></div>
+    </div>
     </div>
 
     <div class="input-container">
