@@ -43,6 +43,11 @@ export default {
       thinkingIndex: null,
     };
   },
+  watch: {
+    selectedMenu() {
+      this.messages = [];
+    }
+  },
   methods: {
     async sendMessage() {
       if (!this.newMessage.trim()) return;
